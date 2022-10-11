@@ -1,0 +1,9 @@
+.bodyRow {
+  height: 60px;
+  font-size: larger;
+  transition: all .3s;
+}
+
+.bodyRow:hover {
+  background-color: #f4f4f4;
+}
