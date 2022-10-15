@@ -34,7 +34,6 @@ export const Form = (props) => {
     }
     try {
       mode ? await updateUser(params.id, user) : await createUser(user);
-      console.log("lvdn");
       setUser({ name: "", department: "", empId: "", salary: "" });
       navigate("/");
     } catch (err) {
