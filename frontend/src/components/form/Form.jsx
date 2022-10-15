@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUser, createUser, updateUser } from "../../http";
 import styles from "./form.module.css";
+import { motion } from "framer-motion";
 
 export const Form = (props) => {
   const [user, setUser] = useState({
@@ -33,6 +34,7 @@ export const Form = (props) => {
     }
     try {
       mode ? await updateUser(params.id, user) : await createUser(user);
+      console.log("lvdn");
       setUser({ name: "", department: "", empId: "", salary: "" });
       navigate("/");
     } catch (err) {
@@ -50,7 +52,12 @@ export const Form = (props) => {
   }
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, x: 10 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.1 }}
+      exit={{ opacity: 0 }} 
+    >
       <div className="form">
         <div className="flex items-center justify-center">
           <div className="mx-auto w-3/4">
@@ -124,6 +131,6 @@ export const Form = (props) => {
           </div>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 };
