@@ -54,7 +54,7 @@ app.get("/api/users", async (req, res) => {
 app.get("/api/user/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    const user = await User.findById(id);
+    const user = await User.findById({_id: id});
     if (!user) {
       throw "User not found";
     }

@@ -18,7 +18,7 @@ export const Form = (props) => {
 
   useEffect(() => {
     if (mode === "edit") {
-      fetchUser();
+      fetchUserById();
     }
   }, []);
 
@@ -41,7 +41,7 @@ export const Form = (props) => {
     }
   }
 
-  async function fetchUser() {
+  async function fetchUserById() {
     try {
       const userdata = await getUser(params.id);
       setUser(userdata.data.data);

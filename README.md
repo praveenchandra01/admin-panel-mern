@@ -11,6 +11,7 @@
 - Node Js
 - MongoDb
 - Tailwind CSS
+- Framer motion
 
 ## Preview
 ![](https://github.com/praveenchandra01/admin-panel-mern/blob/main/frontend/img/Preview-1.png)
