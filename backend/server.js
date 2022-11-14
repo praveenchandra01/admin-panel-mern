@@ -12,7 +12,7 @@ app.use(
 );
 
 // Mongodb specific stuff
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URI);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
 
 //Gell all users
 app.get("/api/users", async (req, res) => {
-  const users = await User.find();
+  const users = await User.find({},"-__v");
   res.status(200).json({
     success: true,
     data: users,
@@ -54,7 +54,7 @@ app.get("/api/users", async (req, res) => {
 app.get("/api/user/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    const user = await User.findById({_id: id});
+    const user = await User.findById({_id: id}).select("-__v");
     if (!user) {
       throw "User not found";
     }

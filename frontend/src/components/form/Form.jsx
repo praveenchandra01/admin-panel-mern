@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getUser, createUser, updateUser } from "../../http";
+import { getUserbyId, createUser, updateUser } from "../../http";
 import styles from "./form.module.css";
 import { motion } from "framer-motion";
 
@@ -33,9 +33,11 @@ export const Form = (props) => {
       return;
     }
     try {
-      mode ? await updateUser(params.id, user) : await createUser(user);
+      const response = mode
+        ? await updateUser(params.id, user)
+        : await createUser(user);
       setUser({ name: "", department: "", empId: "", salary: "" });
-      navigate("/");
+      response && navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -43,8 +45,8 @@ export const Form = (props) => {
 
   async function fetchUserById() {
     try {
-      const userdata = await getUser(params.id);
-      setUser(userdata.data.data);
+      const userData = await getUserbyId(params.id);
+      setUser(userData.data.data);
     } catch (err) {
       console.log(err);
     }
@@ -55,7 +57,7 @@ export const Form = (props) => {
       initial={{ opacity: 0, x: 10 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.1 }}
-      exit={{ opacity: 0 }} 
+      exit={{ opacity: 0 }}
     >
       <div className="form">
         <div className="flex items-center justify-center">
