@@ -14,6 +14,6 @@
 - Framer motion
 
 ## Preview
-![](https://github.com/praveenchandra01/admin-panel-mern/blob/main/frontend/img/Preview-1.png)
+![](https://github.com/praveenchandra01/admin-panel-mern/blob/develop/frontend/img/Preview-1.png)
 -
-![](https://github.com/praveenchandra01/admin-panel-mern/blob/main/frontend/img/Preview-2.png)
+![](https://github.com/praveenchandra01/admin-panel-mern/blob/develop/frontend/img/Preview-2.png)
