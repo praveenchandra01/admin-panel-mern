@@ -1,15 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
+const favicon = require("serve-favicon");
 require("dotenv").config();
-const app = express();
 const cors = require("cors");
+const app = express();
 const PORT = process.env.PORT || 5050;
 
-app.use(
-  cors({
-    origin: process.env.BASE_URL,
-  })
-);
+// app.use(
+//   cors({
+//     origin: process.env.BASE_URL,
+//   })
+// );
 
 // Mongodb specific stuff
 mongoose.connect(process.env.MONGO_URI);
@@ -33,12 +35,12 @@ const User = mongoose.model("user", UserSchema);
 
 // Express specific stuff
 app.use(express.json());
-
+app.use(express.static(path.join(__dirname, "/client/build")));
+app.use(favicon(path.join(__dirname, "/client/public", "favicon.ico")));
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello from express");
 });
-
 
 //Gell all users
 app.get("/api/users", async (req, res) => {
@@ -48,7 +50,6 @@ app.get("/api/users", async (req, res) => {
     data: users,
   });
 });
-
 
 //Get single user
 app.get("/api/user/:id", async (req, res) => {
@@ -70,7 +71,6 @@ app.get("/api/user/:id", async (req, res) => {
   }
 });
 
-
 // Create user
 app.post("/api/user", (req, res) => {
   const user = req.body;
@@ -91,7 +91,6 @@ app.post("/api/user", (req, res) => {
     });
   }
 });
-
 
 //Update user
 app.put("/api/user/:id", async (req, res) => {
@@ -115,7 +114,6 @@ app.put("/api/user/:id", async (req, res) => {
   }
 });
 
-
 //Delete User
 app.delete("/api/user/:id", async (req, res) => {
   const id = req.params.id;
@@ -138,4 +136,7 @@ app.delete("/api/user/:id", async (req, res) => {
   }
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "/index.html"));
+});
 app.listen(PORT, () => console.log(`server is listening on port ${PORT}`));

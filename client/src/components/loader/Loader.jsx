@@ -7,6 +7,6 @@ const Loader = () => {
       <div className={styles.loader}></div>
     </div>
   );
-};
+}
 
 export default Loader
