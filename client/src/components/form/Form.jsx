@@ -29,15 +29,13 @@ export const Form = (props) => {
   async function handleSubmit(e) {
     e.preventDefault();
     if (!user.name || !user.department || !user.empId || !user.salary) {
-      alert("All feilds are required!");
+      alert("All fields are required!");
       return;
     }
     try {
-      const response = mode
-        ? await updateUser(params.id, user)
-        : await createUser(user);
+      mode ? await updateUser(params.id, user) : await createUser(user);
       setUser({ name: "", department: "", empId: "", salary: "" });
-      response && navigate("/");
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
